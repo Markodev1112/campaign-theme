@@ -1,3 +1,17 @@
+{% style %}
+  .campaign h2 {
+    font-size: 32px;
+    color: {{section.settings.campaign_color_1}};
+    {% comment %} text-shadow: 0 13.36px 8.896px #ef4f36, 0 -2px 1px #f32222; {% endcomment %}
+    letter-spacing: 0px;
+    padding: 0;
+  }
+  @media (max-width: 500px) {
+    .campaign h2 {
+      font-size: 28px;
+    }
+  }
+{% endstyle %}
 {%- if section.settings.layout == 'rows' -%}
   {%- if section.settings.grid == 2 -%}
     {%- assign product_class = 'column half' -%}
@@ -21,11 +35,41 @@
   {% if section.settings.title != blank or section.settings.show_view_all %}
     <div class="section-heading" data-cc-animate>
       {% if section.settings.title != blank %}
-        <h2 class="h2">
-          <a data-cc-animate-click href="{{ collections[section.settings.collection].url }}">
-            {{ section.settings.title | escape }}
-          </a>
-        </h2>
+        
+        {%- if section.settings.campaign == true -%}
+          <div class="campaign">
+            <a href="{{ section.settings.campaign_link }}">
+              {% if section.settings.campaign_logo_1 %}                          
+                <img  srcset="
+                        {%- if section.settings.campaign_logo_1.width >= 375 -%}{{ section.settings.campaign_logo_1 | image_url: width: 375 }} 375w,{%- endif -%}
+                        {%- if section.settings.campaign_logo_1.width >= 750 -%}{{ section.settings.campaign_logo_1 | image_url: width: 750 }} 750w,{%- endif -%}
+                        {{ section.settings.campaign_logo_1 | image_url }} {{ section.settings.campaign_logo_1.width }}w"
+  
+                src="{{ section.settings.campaign_logo_1 | img_url: medium }}" alt="campaign">
+              {% endif %}  
+  
+              {% if section.settings.campaign_text %}
+                <h2> {{ section.settings.campaign_text }} </h2>     
+              {% endif %}
+  
+              {% if section.settings.campaign_logo_2 %}                          
+                <img  srcset="
+                        {%- if section.settings.campaign_logo_2.width >= 375 -%}{{ section.settings.campaign_logo_2 | image_url: width: 375 }} 375w,{%- endif -%}
+                        {%- if section.settings.campaign_logo_2.width >= 750 -%}{{ section.settings.campaign_logo_2| image_url: width: 750 }} 750w,{%- endif -%}
+                        {{ section.settings.campaign_logo_2 | image_url }} {{ section.settings.campaign_logo_2.width }}w"
+  
+                src="{{ section.settings.campaign_logo_2 | img_url: medium }}" alt="campaign">
+              {% endif %}  
+            </a> 
+          </div>
+          
+        {%- else -%}
+          <h2 class="h2">
+            <a data-cc-animate-click href="{{ collections[section.settings.collection].url }}">
+              {{ section.settings.title | escape }}
+            </a>
+          </h2>
+        {% endif %}
       {% else %}
           <div></div>
       {% endif %}
@@ -98,6 +142,45 @@
     "name": "Featured collection",
     "class": "section-featured-collection",
     "settings": [
+      {
+        "type": "header",
+        "content": "Campaign",
+        "info": "It is for campaign part"
+      },
+      {
+        "type": "checkbox",
+        "id": "campaign",
+        "label": "Campaign checkbox",
+        "default": false,
+        "info": "You can set campaign banner using this checkbox"
+      },
+      {
+        "type": "image_picker",
+        "id": "campaign_logo_1",
+        "label": "Campaign logo"
+      },      
+      {
+        "type": "text",
+        "id": "campaign_text",
+        "label": "Campaign title",
+        "default": "Spring Campaign"
+      },
+      {
+        "type": "image_picker",
+        "id": "campaign_logo_2",
+        "label": "Campaign logo"
+      },
+      {
+        "type": "url",
+        "id": "campaign_link",
+        "label": "Campaign Link"
+      },      
+      {
+        "type": "color",
+        "id": "campaign_color_1",
+        "label": "Campaign text color",
+        "default": "#E35359"
+      }, 
       {
         "type": "text",
         "id": "title",

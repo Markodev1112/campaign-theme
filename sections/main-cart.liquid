@@ -69,7 +69,7 @@
                   data-item-id="{{ item.id }}"
                   data-item-key="{{ item.key }}" 
                   data-item-line="{{ forloop.index }}" data-weight = "{{ item.variant.weight }}"
-                  data-properties='{{ item.properties | json }}'
+                  data-properties='{{ item.properties | json }}' data-item-title = "{{ item.title }}"
                 >
                   <div class="col-image">
                     <a data-cc-animate-click class="image" href="{{ item.url }}">
@@ -86,7 +86,7 @@
                           {{ 'products.product.preorder' | t }}
                         </div>
                       {% endif %}
-                      {% if item.product.metafields.my_fields.vikt_per_platta.value or item.product.metafields.my_fields.vikt_per_kantsten or item.product.metafields.my_fields.vikt_per_stolpe %}
+                      {% if item.product.metafields.my_fields.vikt_per_platta.value or item.product.metafields.my_fields.vikt_per_kantsten or item.product.metafields.my_fields.vikt_per_stolpe or item.product.metafields.my_fields.vikt_per_trappsteg %}
                         {% if item.product.metafields.my_fields.vikt_per_platta.value %}
                           {% assign weight = item.product.metafields.my_fields.vikt_per_platta.value %} 
                         {% endif %}
@@ -95,6 +95,9 @@
                         {% endif %}
                         {% if item.product.metafields.my_fields.vikt_per_stolpe %}
                           {% assign weight = item.product.metafields.my_fields.vikt_per_stolpe.value %} 
+                        {% endif %}
+                        {% if item.product.metafields.my_fields.vikt_per_trappsteg %}
+                          {% assign weight = item.product.metafields.my_fields.vikt_per_trappsteg.value %} 
                         {% endif %}
                       {% elsif item.product.metafields.my_fields.vikt_per_pall %}
                         {% assign weight = item.product.metafields.my_fields.vikt_per_pall.value %} 

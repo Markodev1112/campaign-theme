@@ -11,7 +11,11 @@
 
   assign current_sort_by = collection.sort_by | default: collection.default_sort_by
 -%}
-
+{% style %}
+  .image-overlay .overlay__content .line-1.campaign {
+      /* color: {{section.settings.title_color }}; */
+  }
+{% endstyle %}
 <div data-section-type="collection-template"
      data-ajax-filtering="{{ section.settings.ajax_products }}"
      data-components="tabs,product-block,price-range,accordion,sticky-scroll-direction"
@@ -38,7 +42,7 @@
                   {%- if collection.featured_image.width >= 1500 -%}{{ collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
                   {{ collection.featured_image | image_url }} {{ collection.featured_image.width }}w
                 "
-                src="{{ collection.featured_image | img_url: '1024x1024' }}" alt="{{ collection.featured_image.alt | escape }}" class="rimage__image lazyload">
+                src="{{ collection.featured_image | img_url: medium }}" alt="{{ collection.featured_image.alt | escape }}" class="rimage__image lazyload">
             </div>
           </noscript>
         </div>
@@ -51,7 +55,7 @@
         <div class="content transparent">
           {% if section.settings.show_collection_content %}
             {% if collection.description != blank %}
-              <h1 class="line-1 feature-header" data-cc-animate>{{ collection.title }}</h1>
+              <h1 class="line-1 feature-header {% if section.settings.campaign == true %} campaign {% endif %}" data-cc-animate>{{ collection.title }}</h1>
 
               {% if section.settings.description_position == "top" %}
                 <div class="line-2 rte" data-cc-animate data-cc-animate-delay="0.2s">
@@ -101,6 +105,18 @@
       {
         "type": "header",
         "content": "Header"
+      },
+      {
+        "type": "checkbox",
+        "id": "campaign",
+        "label": "Campaign collection",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "title_color",
+        "label": "Title color",
+        "default": "#e35359"
       },
       {
         "type": "checkbox",

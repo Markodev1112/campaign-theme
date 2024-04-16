@@ -7759,14 +7759,18 @@ function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Obj
 // cart 
 // cart 
 setInterval(() => {
-  $('.cart-list li[p-handle="pallbrytningskostnad"] .quantity-and-remove').css('display', 'none');
-  $('.cart-list li[p-handle="returpall-eur-pall"] .quantity-and-remove').css('display', 'none');
-  $('.cart-list li[p-handle="byggpall"] .quantity-and-remove').css('display', 'none');
+  $('.cart-list li[data-item-title="Palldelningskostnad"] .quantity-and-remove').css('display', 'none');
+  $('.cart-list li[data-item-title="Returpall-eur-pall"] .quantity-and-remove').css('display', 'none');
+  $('.cart-list li[data-item-title="Byggpall"] .quantity-and-remove').css('display', 'none');
+  $('.cart-list li[data-item-title="Engångspall"] .quantity-and-remove').css('display', 'none');
+  $('.cart-list li[data-item-title="Byggpall - Betongprodukter"] .quantity-and-remove').css('display', 'none');
 
+  $('.cart-list li[data-item-title="Palldelningskostnad"]').addClass("custom-product");
+  $('.cart-list li[data-item-title="Returpall-eur-pall"]').addClass("custom-product");
+  $('.cart-list li[data-item-title="Byggpall"]').addClass("custom-product");
+  $('.cart-list li[data-item-title="Engångspall"]').addClass("custom-product");
+  $('.cart-list li[data-item-title="Byggpall - Betongprodukter"]').addClass("custom-product");
 
-  $('.cart-list li[p-handle="pallbrytningskostnad"]').addClass("custom-product");
-  $('.cart-list li[p-handle="returpall-eur-pall"]').addClass("custom-product");
-  $('.cart-list li[p-handle="byggpall"]').addClass("custom-product");
 
 
 
